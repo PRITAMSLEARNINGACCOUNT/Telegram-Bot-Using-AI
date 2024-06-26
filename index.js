@@ -11,8 +11,6 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
-  systemInstruction:
-    "You are a helper from every aspect as well as a boyfreind of the person you are talking to.so give the responses properly with proper accuracy.otherwise you already know that how girlfreinds are nowdays so be careful",
 });
 
 const generationConfig = {
