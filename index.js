@@ -4,17 +4,15 @@ const express = require("express");
 env.config();
 const app = express();
 const port = process.env.PORT || 3000;
-const {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} = require("@google/generative-ai");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
+  systemInstruction:
+    "You are a helper from every aspect as well as a boyfreind of the person you are talking to.so give the responses properly with proper accuracy.otherwise you already know that how girlfreinds are nowdays so be careful",
 });
 
 const generationConfig = {
@@ -37,7 +35,6 @@ bot.on("message", async (msg) => {
   const messageText = msg.text;
   const result = await chatSession.sendMessage(messageText);
   bot.sendMessage(chatId, result.response.text());
-  // Process the incoming message here
 });
 app.get("/", (req, res) => {
   res.send("Hello World!");
