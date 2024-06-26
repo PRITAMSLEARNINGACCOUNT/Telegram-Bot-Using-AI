@@ -34,8 +34,8 @@ const token = process.env.BOT_API_KEY;
 const bot = new TelegramBot(token, { polling: true });
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
-  // const messageText = msg.text;
-  const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
+  const messageText = msg.text;
+  const result = await chatSession.sendMessage(messageText);
   bot.sendMessage(chatId, result.response.text());
   // Process the incoming message here
 });
