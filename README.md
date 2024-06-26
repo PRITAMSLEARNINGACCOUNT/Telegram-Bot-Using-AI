@@ -1,7 +1,6 @@
 # Telegram CHATBOT
 
 - Created Using GEMINI AI,dotenv,node-telegram-bot-api & expressjs
-- Visit The Chatbot By Clicking On This Link `https://t.me/test_python_4511_bot`
 <!-- - uv is used to make this project -->
 
 # Pre-Requisitory
