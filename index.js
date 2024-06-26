@@ -2,7 +2,6 @@ const TelegramBot = require("node-telegram-bot-api");
 const env = require("dotenv");
 const express = require("express");
 env.config();
-const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
