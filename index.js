@@ -4,6 +4,7 @@ const express = require("express");
 env.config();
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(express.json());
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const apiKey = process.env.GEMINI_API_KEY;
@@ -38,9 +39,14 @@ bot.on("message", async (msg) => {
     console.log(error);
   }
 });
-bot.setWebHook(
-  `https://api.telegram.org/bot${process.env.BOT_API_KEY}/setWebhook?url=https://telegram-bot-using-ai.vercel.app/`
-);
+
+bot.setWebHook(`https://telegram-bot-using-ai.vercel.app/telegram-webhook`);
+
+app.post("/telegram-webhook", (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
 app.get("/", (req, res) => {
   res.send("YYayy.....Now You Can Make Your Own Chatbot");
 });
