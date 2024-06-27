@@ -38,12 +38,12 @@ app.post("/telegram-webhook", async (req, res) => {
   let CHAT_ID = await Body.message.from.id;
   // console.log(CHAT_ID);
   let CHAT_Text = await Body.message.text;
-  const result = await chatSession.sendMessage(CHAT_Text);
   try {
     if (CHAT_Text === "/start") {
       await bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
       // res.status(200).send("OKAY");
     } else {
+      const result = await chatSession.sendMessage(CHAT_Text);
       await bot.sendMessage(CHAT_ID, result.response.text());
       // res.status(200).send("OKAY");
     }
