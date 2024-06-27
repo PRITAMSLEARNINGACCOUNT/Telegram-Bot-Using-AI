@@ -29,26 +29,14 @@ const chatSession = model.startChat({
 
 const token = process.env.BOT_API_KEY;
 const bot = new TelegramBot(token);
-// bot.on("message", async (msg) => {
-//   try {
-//     const chatId = msg.chat.id;
-//     const messageText = msg.text;
-//     const result = await chatSession.sendMessage(messageText);
-//     bot.sendMessage(chatId, result.response.text());
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
 
 bot.setWebHook(process.env.WebHook_URL);
 
 app.post("/telegram-webhook", async (req, res) => {
-  // bot.processUpdate(req.body);
   let Body = req.body;
   let CHAT_ID = Body.message.from.id;
   let CHAT_Text = Body.message.text;
   const result = await chatSession.sendMessage(CHAT_Text);
-  // console.log(CHAT_ID, CHAT_Text);
   if (CHAT_Text === "/start") {
     bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
   } else {
@@ -58,7 +46,7 @@ app.post("/telegram-webhook", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("YYayy.....Now You Can Make Your Own Chatbot");
+  res.send("YYayy.....Finally The CHATBOT Is Working......");
 });
 
 app.listen(port, () => {
