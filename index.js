@@ -33,11 +33,13 @@ const bot = new TelegramBot(token);
 bot.setWebHook(process.env.WebHook_URL);
 
 app.post("/telegram-webhook", async (req, res) => {
+  let Body = await req.body;
+  // console.log(Body);
+  let CHAT_ID = await Body.message.from.id;
+  // console.log(CHAT_ID);
+  let CHAT_Text = await Body.message.text;
+  const result = await chatSession.sendMessage(CHAT_Text);
   try {
-    let Body = await req.body;
-    let CHAT_ID = await Body.message.from.id;
-    let CHAT_Text = await Body.message.text;
-    const result = await chatSession.sendMessage(CHAT_Text);
     if (CHAT_Text === "/start") {
       await bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
       // res.status(200).send("OKAY");
