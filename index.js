@@ -29,21 +29,31 @@ const chatSession = model.startChat({
 
 const token = process.env.BOT_API_KEY;
 const bot = new TelegramBot(token);
-bot.on("message", async (msg) => {
-  try {
-    const chatId = msg.chat.id;
-    const messageText = msg.text;
-    const result = await chatSession.sendMessage(messageText);
-    bot.sendMessage(chatId, result.response.text());
-  } catch (error) {
-    console.log(error);
+// bot.on("message", async (msg) => {
+//   try {
+//     const chatId = msg.chat.id;
+//     const messageText = msg.text;
+//     const result = await chatSession.sendMessage(messageText);
+//     bot.sendMessage(chatId, result.response.text());
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+bot.setWebHook(`https://90d6-45-112-71-114.ngrok-free.app/telegram-webhook`);
+
+app.post("/telegram-webhook", async (req, res) => {
+  // bot.processUpdate(req.body);
+  let Body = req.body;
+  let CHAT_ID = Body.message.from.id;
+  let CHAT_Text = Body.message.text;
+  const result = await chatSession.sendMessage(CHAT_Text);
+  // console.log(CHAT_ID, CHAT_Text);
+  if (CHAT_Text === "/start") {
+    bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
+  } else {
+    bot.sendMessage(CHAT_ID, result.response.text());
   }
-});
-
-bot.setWebHook(`https://telegram-bot-using-ai.vercel.app/telegram-webhook`);
-
-app.post("/telegram-webhook", (req, res) => {
-  bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
