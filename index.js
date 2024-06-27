@@ -28,7 +28,7 @@ const chatSession = model.startChat({
 });
 
 const token = process.env.BOT_API_KEY;
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token);
 bot.on("message", async (msg) => {
   try {
     const chatId = msg.chat.id;
