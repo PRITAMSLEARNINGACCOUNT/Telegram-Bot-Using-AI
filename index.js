@@ -44,6 +44,7 @@ app.post("/telegram-webhook", async (req, res) => {
       // res.status(200).send("OKAY");
     } else {
       const result = await chatSession.sendMessage(CHAT_Text);
+      // console.log(result.response.text());
       await bot.sendMessage(CHAT_ID, result.response.text());
       // res.status(200).send("OKAY");
     }
