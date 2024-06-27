@@ -38,6 +38,9 @@ bot.on("message", async (msg) => {
     console.log(error);
   }
 });
+bot.setWebHook(
+  `https://api.telegram.org/bot${process.env.BOT_API_KEY}/setWebhook?url=https://telegram-bot-using-ai.vercel.app/`
+);
 app.get("/", (req, res) => {
   res.send("YYayy.....Now You Can Make Your Own Chatbot");
 });
