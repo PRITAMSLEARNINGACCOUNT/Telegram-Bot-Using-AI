@@ -40,18 +40,19 @@ app.post("/telegram-webhook", async (req, res) => {
     const result = await chatSession.sendMessage(CHAT_Text);
     if (CHAT_Text === "/start") {
       await bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
-      res.status(200).send("OKAY");
+      // res.status(200).send("OKAY");
     } else {
       await bot.sendMessage(CHAT_ID, result.response.text());
-      res.status(200).send("OKAY");
+      // res.status(200).send("OKAY");
     }
   } catch (error) {
     await bot.sendMessage(
       CHAT_ID,
       "Sorry Some Interrupt Happened On My Side Please Continue To See If It Is Happening Again Or Not...."
     );
-    res.status(200).send("OKAY");
+    // res.status(200).send("OKAY");
   }
+  res.sendStatus(200);
 });
 
 app.get("/", (req, res) => {
