@@ -39,12 +39,12 @@ app.post("/telegram-webhook", async (req, res) => {
     let CHAT_Text = Body.message.text;
     const result = await chatSession.sendMessage(CHAT_Text);
     if (CHAT_Text === "/start") {
-      bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
+      await bot.sendMessage(CHAT_ID, "Welcome To The World Of AI");
     } else {
-      bot.sendMessage(CHAT_ID, result.response.text());
+      await bot.sendMessage(CHAT_ID, result.response.text());
     }
   } catch (error) {
-    bot.sendMessage(
+    await bot.sendMessage(
       CHAT_ID,
       "Sorry Some Interrupt Happened On My Side Please Continue To See If It Is Happening Again Or Not...."
     );
