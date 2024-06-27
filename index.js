@@ -40,7 +40,7 @@ const bot = new TelegramBot(token);
 //   }
 // });
 
-bot.setWebHook(`https://telegram-bot-using-ai.vercel.app/telegram-webhook`);
+bot.setWebHook(process.env.WebHook_URL);
 
 app.post("/telegram-webhook", async (req, res) => {
   // bot.processUpdate(req.body);
